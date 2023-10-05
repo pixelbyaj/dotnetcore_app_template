@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "Services": {
+      "commandName": "Project",
+      "commandLineArgs": "-console true -configPath \"C:\\Program Files (x86)\\Rudsta\\MessageService\\config\"",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

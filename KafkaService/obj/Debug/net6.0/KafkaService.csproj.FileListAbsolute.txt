@@ -1,0 +1,12 @@
+C:\source\rudsta\MessageServices\KafkaService\bin\Debug\net6.0\KafkaService.deps.json
+C:\source\rudsta\MessageServices\KafkaService\bin\Debug\net6.0\KafkaService.dll
+C:\source\rudsta\MessageServices\KafkaService\bin\Debug\net6.0\KafkaService.pdb
+C:\source\rudsta\MessageServices\KafkaService\obj\Debug\net6.0\KafkaService.csproj.AssemblyReference.cache
+C:\source\rudsta\MessageServices\KafkaService\obj\Debug\net6.0\KafkaService.GeneratedMSBuildEditorConfig.editorconfig
+C:\source\rudsta\MessageServices\KafkaService\obj\Debug\net6.0\KafkaService.AssemblyInfoInputs.cache
+C:\source\rudsta\MessageServices\KafkaService\obj\Debug\net6.0\KafkaService.AssemblyInfo.cs
+C:\source\rudsta\MessageServices\KafkaService\obj\Debug\net6.0\KafkaService.csproj.CoreCompileInputs.cache
+C:\source\rudsta\MessageServices\KafkaService\obj\Debug\net6.0\KafkaService.dll
+C:\source\rudsta\MessageServices\KafkaService\obj\Debug\net6.0\refint\KafkaService.dll
+C:\source\rudsta\MessageServices\KafkaService\obj\Debug\net6.0\KafkaService.pdb
+C:\source\rudsta\MessageServices\KafkaService\obj\Debug\net6.0\ref\KafkaService.dll
