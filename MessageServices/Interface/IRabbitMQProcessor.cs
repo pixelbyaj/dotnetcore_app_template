@@ -1,6 +1,6 @@
 ﻿using RabbitMQService;
 
-namespace MessageServices.Interface
+namespace StartupServices.Interface
 {
     public interface IRabbitMQProcessor: IProcessor
     {

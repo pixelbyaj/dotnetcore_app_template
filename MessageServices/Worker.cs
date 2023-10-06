@@ -1,31 +1,25 @@
-using MessageServices.Interface;
-using MessageServices.Processors;
+using StartupServices.Interface;
+using StartupServices.Processors;
 using System.Data;
 
-namespace MessageServices
+namespace StartupServices
 {
     public class Worker : BackgroundService
     {
         #region private instance variable
         private readonly ILogger<Worker> _logger;
         private readonly IRabbitMQProcessor _rabbitMQProcessor;
-        private readonly IMQProcessor _mqProcessor;
         private readonly IKafkaProcessor _kafkaProcessor;
-        private readonly IAzureQueueProcessor _azureQueueProcessor;
         #endregion
 
         #region ctor
         public Worker(ILogger<Worker> logger,
-            IMQProcessor mqProcessor,
             IRabbitMQProcessor rabbitMQProcessor,
-            IKafkaProcessor kafkaProcessor,
-            IAzureQueueProcessor azureQueueProcessor)
+            IKafkaProcessor kafkaProcessor)
         {
             _logger = logger;
-            _mqProcessor = mqProcessor;
             _rabbitMQProcessor = rabbitMQProcessor;
             _kafkaProcessor = kafkaProcessor;
-            _azureQueueProcessor = azureQueueProcessor;
         }
         #endregion
 

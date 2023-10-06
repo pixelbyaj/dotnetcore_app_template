@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace StartupServices.Interface
 {
-    public interface IKafkaProcessor: IProcessor
+    internal interface IEventHandler
     {
-        public void StartProcess(CancellationToken stoppingToken);
-
+        Task Handle(dynamic eventData);
     }
 }

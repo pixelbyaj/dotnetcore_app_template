@@ -1,11 +1,11 @@
 ﻿using KafkaService;
 using KafkaService.Models;
-using MessageServices.Helper;
-using MessageServices.Interface;
+using StartupServices.Helper;
+using StartupServices.Interface;
 using System.Net;
 using System.Timers;
 
-namespace MessageServices.Processors
+namespace StartupServices.Processors
 {
     public class KafkaProcessor : BaseProcessor, IKafkaProcessor
     {

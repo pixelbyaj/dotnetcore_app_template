@@ -1,4 +1,4 @@
-﻿namespace MessageServices.Helper
+﻿namespace StartupServices.Helper
 {
     internal static class ConfigHelper
     {

@@ -1,11 +1,11 @@
-﻿using MessageServices.Interface;
+﻿using StartupServices.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MessageServices.Processors
+namespace StartupServices.Processors
 {
     public abstract class BaseProcessor
     {

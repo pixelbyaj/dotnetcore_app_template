@@ -1,9 +1,9 @@
 using Microsoft.Extensions.Hosting.WindowsServices;
 using NLog.Extensions.Logging;
-using MessageServices.Helper;
-using MessageServices;
-using MessageServices.Processors;
-using MessageServices.Interface;
+using StartupServices.Helper;
+using StartupServices;
+using StartupServices.Processors;
+using StartupServices.Interface;
 
 var cmdArguments = ConfigHelper.ParseCommandline(args);
 

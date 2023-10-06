@@ -4,12 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MessageServices.Interface
+namespace StartupServices.Interface
 {
     public interface IProcessor
     {
-        public void Bootstrap();
-        public void StartProcess();
+        public void Connect();
+        public void Subscribe<T>(string eventName);
+
+        public void Unsubscribe();
+
+        public void Publish();
+
         public bool Enabled { get; }
     }
 }
