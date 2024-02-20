@@ -7,7 +7,7 @@ using System.Timers;
 
 namespace StartupServices.Processors
 {
-    public class KafkaProcessor : BaseProcessor, IKafkaProcessor
+    public class KafkaProcessor : IKafkaProcessor
     {
         #region constant
         private const string MAIN_SECTION = "Configuration:Services:Kafka";
@@ -22,20 +22,24 @@ namespace StartupServices.Processors
         private readonly List<ConsumerModel> _consumerConfigs;
         private readonly List<ProducerModel> _producerConfigs;
         private readonly Dictionary<string, KafkaManager> _kafkaManager;
+        private readonly IConfiguration _configuration;
+        private readonly ILogger<KafkaProcessor> _logger;
         private readonly int s_processingTimeInMilliseconds;
         private CancellationToken _cancellationToken;
         #endregion
 
         #region ctor
-        public KafkaProcessor(IConfiguration configuration, ILogger<KafkaProcessor> logger) : base(configuration,logger)
+        public KafkaProcessor(IConfiguration configuration, ILogger<KafkaProcessor> logger)
         {
-            bool.TryParse(_configuration.GetSection(MAIN_SECTION).GetSection("Enabled").Value, out _enabled);            
+            _configuration = configuration;
+            _logger = logger;
             s_processingTimeInMilliseconds = Convert.ToInt32(configuration.GetSection($"{MAIN_SECTION}:Producers:ProcessingTimeInMilliseconds").Value);
-
             _consumers = new();
             _consumerConfigs = new();
             _producerConfigs = new();
             _kafkaManager = new();
+            Bootstrap();
+            StartProcess();
         }
         #endregion
 
@@ -43,13 +47,8 @@ namespace StartupServices.Processors
         /// <summary>
         /// 
         /// </summary>
-        public void Bootstrap()
+        private void Bootstrap()
         {
-            if (!_enabled)
-            {
-                _logger.LogInformation("Kafka service is disabled");
-                return;
-            }
             var config = _configuration.GetSection(MAIN_SECTION);
             var managerSections = config.GetSection(MANAGER_SECTION);
             var consumerSections = config.GetSection(CONSUMER_SECTION);
@@ -61,25 +60,9 @@ namespace StartupServices.Processors
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        public void StartProcess(CancellationToken cancellationToken)
-        {
-            if (!_enabled)
-            {
-                _logger.LogInformation("Kafka service is disabled");
-                return;
-            }
-            
-            _cancellationToken = cancellationToken;
-            StartProcess();
-        }
-
-        /// <summary>
         /// This method required to call StartProcess method with CancellationToken
         /// </summary>
-        public void StartProcess()
+        private void StartProcess()
         {
             if(_cancellationToken == CancellationToken.None)
             {

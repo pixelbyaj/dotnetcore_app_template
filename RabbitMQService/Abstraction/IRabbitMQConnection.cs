@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RabbitMQService
+namespace RabbitMQService.Abstraction
 {
-    internal interface IRabbitMQConnection
+    public interface IRabbitMQConnection
         : IDisposable
     {
         bool IsConnected { get; }

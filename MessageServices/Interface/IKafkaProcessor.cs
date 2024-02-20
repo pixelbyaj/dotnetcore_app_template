@@ -8,7 +8,6 @@ namespace StartupServices.Interface
 {
     public interface IKafkaProcessor: IProcessor
     {
-        public void StartProcess(CancellationToken stoppingToken);
 
     }
 }

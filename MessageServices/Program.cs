@@ -25,8 +25,8 @@ IHost host =
             loggingBuilder.AddNLog(config);
         });
 
-        services.AddSingleton<IRabbitMQProcessor, RabbitMQProcessor>();
-        services.AddSingleton<IKafkaProcessor,KafkaProcessor>();
+        services.AddRabbitMQ(config);
+        services.AddKafka(config);
         if (!cmdArguments.ContainsKey("console"))
         {
             #pragma warning disable CA1416 // Validate platform compatibility

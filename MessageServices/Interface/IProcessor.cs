@@ -8,13 +8,5 @@ namespace StartupServices.Interface
 {
     public interface IProcessor
     {
-        public void Connect();
-        public void Subscribe<T>(string eventName);
-
-        public void Unsubscribe();
-
-        public void Publish();
-
-        public bool Enabled { get; }
     }
 }

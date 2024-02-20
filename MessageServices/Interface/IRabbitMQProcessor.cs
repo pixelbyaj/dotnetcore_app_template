@@ -4,5 +4,6 @@ namespace StartupServices.Interface
 {
     public interface IRabbitMQProcessor: IProcessor
     {
+
     }
 }

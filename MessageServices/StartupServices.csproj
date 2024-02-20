@@ -29,9 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AzureQueueProcessor\AzureQueueService.csproj" />
     <ProjectReference Include="..\KafkaService\KafkaService.csproj" />
-    <ProjectReference Include="..\MQService\MQService.csproj" />
     <ProjectReference Include="..\RabbitMQService\RabbitMQService.csproj" />
   </ItemGroup>
 
