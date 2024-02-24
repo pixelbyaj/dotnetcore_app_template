@@ -5,16 +5,16 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Services.csproj", "."]
-RUN dotnet restore "./Services.csproj"
+
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "Services.csproj" -c Release -o /app/build
-
+RUN dotnet restore "./MessageService/MessageService.csproj"
+WORKDIR "/src/MessageService"
+RUN dotnet build "MessageService.csproj" -c Release -o /app/build
+#
 FROM build AS publish
-RUN dotnet publish "Services.csproj" -c Release -o /app/publish /p:UseAppHost=false
-
+RUN dotnet publish "MessageService.csproj" -c Release -o /app/publish /p:UseAppHost=false
+#
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Services.dll"]
+ENTRYPOINT ["dotnet", "MessageService.dll","--console", "--config-path","/app"]

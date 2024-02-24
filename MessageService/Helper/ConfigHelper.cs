@@ -2,7 +2,7 @@
 {
     internal static class ConfigHelper
     {
-        private static readonly string[] _commandArgs = { "configPath","console" };
+        private static readonly string[] _commandArgs = { "config-path", "console" };
         public static IDictionary<string, string>? GetDictionary(IConfigurationSection configurationSection)
         {
             var configs = configurationSection.GetChildren();
@@ -17,14 +17,14 @@
         public static IConfigurationRoot SetConfiguration(IDictionary<string, string> args)
         {
             return new ConfigurationBuilder()
-                    .SetBasePath(args["configPath"])
+                    .SetBasePath(args["config-path"])
                     .AddJsonFile("appsettings.json", optional: false)
                     .AddEnvironmentVariables()
                     .Build();
         }
         public static void SetNLogConfiguration(string configPath)
         {
-            var nlogPath = $"{configPath}\\nlog.config";
+            var nlogPath = $"{configPath}/nlog.config";
             NLog.LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(nlogPath);
         }
         public static IDictionary<string, string> ParseCommandline(string[] args)
@@ -33,21 +33,36 @@
             {
                 var arguments = new Dictionary<string, string>
                 {
-                    { "configPath", System.IO.Directory.GetCurrentDirectory() }
+                    { "config-path", System.IO.Directory.GetCurrentDirectory() }
                 };
                 return arguments;
             }
-            var cmdlineArguments = Enumerable.Range(0, args.Length / 2).ToDictionary(i => args[2 * i].Replace("-", ""), i => args[2 * i + 1]);
+            var cmdlineArguments = new Dictionary<string, string>();
 
-            foreach (string arg in cmdlineArguments.Keys)
+            // Loop through each command-line argument
+            for (int i = 0; i < args.Length; i++)
             {
-                if (!_commandArgs.Contains(arg))
-                    throw new ArgumentException("Invalid argument", arg);
+                // Check if the argument starts with "--"
+                if (args[i].StartsWith("--"))
+                {
+                    // Get the argument name without the "--" prefix
+                    string argName = args[i].Substring(2);
+
+                    // Check if there's another argument after the current one
+                    if (i + 1 < args.Length && !args[i + 1].StartsWith("--"))
+                    {
+                        // If yes, use it as the value
+                        cmdlineArguments.Add(argName,args[i + 1]);
+                        i++; // Skip the next argument
+                    }
+                    else
+                    {
+                        // If no value provided, store an empty string
+                        cmdlineArguments.Add(argName, "");
+                    }
+                }
             }
-            if (cmdlineArguments.Count == 0 || !cmdlineArguments.ContainsKey("configPath"))
-            {
-                cmdlineArguments.Add("configPath", System.IO.Directory.GetCurrentDirectory());
-            }
+
             return cmdlineArguments;
 
         }

@@ -8,11 +8,10 @@ using StartupServices.Interface;
 var cmdArguments = ConfigHelper.ParseCommandline(args);
 
 var config = ConfigHelper.SetConfiguration(cmdArguments);
-ConfigHelper.SetNLogConfiguration(cmdArguments["configPath"]);
+ConfigHelper.SetNLogConfiguration(cmdArguments["config-path"]);
 
-IHost host =
+IHostBuilder hostBuilder =
     Host.CreateDefaultBuilder(args)
-    .UseWindowsService()
     .ConfigureAppConfiguration(a => a.AddConfiguration(config))
     .UseContentRoot(AppContext.BaseDirectory)
     .ConfigureServices(services =>
@@ -27,12 +26,18 @@ IHost host =
 
         services.AddRabbitMQ(config);
         services.AddKafka(config);
-        if (!cmdArguments.ContainsKey("console"))
+    });
+
+    if (!cmdArguments.ContainsKey("console"))
+    {
+        hostBuilder.UseWindowsService()
+        .ConfigureServices(services =>
         {
             #pragma warning disable CA1416 // Validate platform compatibility
             services.AddSingleton<IHostLifetime, WindowsServiceLifetime>();
             #pragma warning restore CA1416 // Validate platform compatibility
-        }
-    })
-    .Build();
+        });
+
+    }
+IHost host = hostBuilder.Build();
 await host.RunAsync();

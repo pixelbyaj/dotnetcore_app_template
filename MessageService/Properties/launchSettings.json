@@ -9,7 +9,8 @@
       "dotnetRunMessages": true
     },
     "Docker": {
-      "commandName": "Docker"
+      "commandName": "Docker",
+      "commandLineArgs": "--console --config-path /app"
     }
   }
 }

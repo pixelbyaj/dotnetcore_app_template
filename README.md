@@ -5,10 +5,9 @@ Welcome to HacktoberFest 2023. Enjoy Coding !
 
 ## About Project:
 * This is a Starter dotnet core project using C#.
-* It has template to start with MongoDB
-* It has template to start with REST API
-* It has template to start with RabbitMQ
-* It has template to start with Kafka 
+* It has template to start working with window service or console app.
+* It has template to start with RabbitMQ.
+* It has template to start with Kafka.
 
 ## Docker
 * It has docker configuration by default. If you add new project or file please modify the dockerfile accordingly.
